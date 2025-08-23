@@ -32,16 +32,5 @@ app.use("/api/hotels", hotelRouter);
 app.use("/api/rooms", roomRouter);
 app.use("/api/bookings", bookingRouter);
 
-connectDB()
-.then(()=>{
-    app.on("error",(error)=>{
-        console.log("Error: ",error);
-        throw error
-    })
-    app.listen(process.env.PORT || 7000,()=>{
-        console.log(`Server is running at port : ${process.env.PORT}`);
-    })
-})
-.catch((err)=>{
-    console.log("MongoDB connection failed: ",err)
-})
+const PORT = process.env.PORT || 7000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
