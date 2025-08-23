@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
+import { assets } from "../assets/assets.js";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
