@@ -17,20 +17,27 @@ connectCloudinary();
 const app = express();
 app.use(cors());
 
-
-app.post("/api/stripe",express.raw({ type: "application/json" }),stripeWebhooks);
-
+// Stripe raw body must come before express.json()
+app.post(
+  "/api/stripe",
+  express.raw({ type: "application/json" }),
+  stripeWebhooks
+);
 
 app.use(express.json());
 app.use(clerkMiddleware());
 
+// Routes
 app.use("/api/clerk", clerkWebhooks);
-
 app.get("/", (req, res) => res.send("API is working"));
 app.use("/api/user", userRouter);
 app.use("/api/hotels", hotelRouter);
 app.use("/api/rooms", roomRouter);
 app.use("/api/bookings", bookingRouter);
 
-const PORT = process.env.PORT || 7000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ❌ Remove app.listen (not allowed on Vercel)
+// const PORT = process.env.PORT || 7000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// ✅ Export app for Vercel
+export default app;
