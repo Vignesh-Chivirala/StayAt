@@ -24,7 +24,6 @@ app.post("/api/clerk", express.raw({ type: "application/json" }), clerkWebhooks)
 app.use(express.json());
 app.use(clerkMiddleware());
 
-app.use("/api/clerk", clerkWebhooks);
 
 app.get("/", (req, res) => res.send("API is working"));
 app.use("/api/user", userRouter);
