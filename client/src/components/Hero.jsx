@@ -25,17 +25,17 @@ const Hero = () => {
 
   return (
     <div className='relative h-screen flex items-center justify-start px-6 md:px-16 lg:px-24 xl:px-32'>
-      {/* Background with gradient overlay */}
+      {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/src/assets/heroImage.png')] bg-cover bg-center" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
 
       {/* Content */}
-      <div className="relative text-white max-w-2xl z-10 mt-20">
+      <div className="relative text-white max-w-4xl z-10 mt-20"> {/* widened container */}
         <p className='bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-sm inline-block'>
           Luxury • Comfort • Elegance
         </p>
 
-        <h1 className='font-playfair text-3xl md:text-6xl font-extrabold leading-tight mt-6 drop-shadow-lg'>
+        <h1 className='font-playfair text-4xl md:text-6xl font-extrabold leading-tight mt-6 drop-shadow-lg'>
           Your Next Unforgettable Stay Starts Here
         </h1>
 
@@ -47,12 +47,12 @@ const Hero = () => {
         {/* Search Form */}
         <form 
           onSubmit={onSearch} 
-          className='mt-10 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 flex flex-col md:flex-row gap-6 shadow-lg'
+          className='mt-10 bg-white rounded-2xl p-6 md:p-8 shadow-2xl 
+                     grid grid-cols-1 md:grid-cols-5 gap-6 items-end w-full'  /* full width */
         >
           {/* Destination */}
-          <div className="flex-1">
-            <label htmlFor="destinationInput" className="flex items-center gap-2 text-sm font-medium mb-2">
-              <img src={assets.calenderIcon} alt="" className='h-4' />
+          <div className="flex flex-col">
+            <label htmlFor="destinationInput" className="text-sm font-semibold mb-2 text-gray-700">
               Where to?
             </label>
             <input 
@@ -63,7 +63,9 @@ const Hero = () => {
               type="text" 
               placeholder="Search a city or destination"
               required
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-xl border border-gray-300 bg-gray-50 
+                         px-4 py-3 text-sm text-gray-900 placeholder-gray-500
+                         outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 shadow-sm"
             />
             <datalist id="destinations">
               {cities.map((city, index) => (
@@ -73,34 +75,36 @@ const Hero = () => {
           </div>
 
           {/* Check In */}
-          <div>
-            <label htmlFor="checkIn" className="flex items-center gap-2 text-sm font-medium mb-2">
-              <img src={assets.calenderIcon} alt="" className='h-4' />
+          <div className="flex flex-col">
+            <label htmlFor="checkIn" className="text-sm font-semibold mb-2 text-gray-700">
               Check-in
             </label>
             <input 
               id="checkIn"
               type="date"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-xl border border-gray-300 bg-gray-50 
+                         px-4 py-3 text-sm text-gray-900 outline-none 
+                         focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 shadow-sm"
             />
           </div>
 
           {/* Check Out */}
-          <div>
-            <label htmlFor="checkOut" className="flex items-center gap-2 text-sm font-medium mb-2">
-              <img src={assets.calenderIcon} alt="" className='h-4' />
+          <div className="flex flex-col">
+            <label htmlFor="checkOut" className="text-sm font-semibold mb-2 text-gray-700">
               Check-out
             </label>
             <input 
               id="checkOut"
               type="date"
-              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-xl border border-gray-300 bg-gray-50 
+                         px-4 py-3 text-sm text-gray-900 outline-none 
+                         focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 shadow-sm"
             />
           </div>
 
           {/* Guests */}
-          <div>
-            <label htmlFor="guests" className="block text-sm font-medium mb-2">
+          <div className="flex flex-col">
+            <label htmlFor="guests" className="text-sm font-semibold mb-2 text-gray-700">
               Guests
             </label>
             <input 
@@ -109,16 +113,21 @@ const Hero = () => {
               min={1}
               max={4}
               placeholder="2"
-              className="w-20 rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-xl border border-gray-300 bg-gray-50 
+                         px-4 py-3 text-sm text-gray-900 outline-none 
+                         focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 shadow-sm"
             />
           </div>
 
           {/* Search Button */}
-          <div className="flex items-end">
+          <div className="flex">
             <button 
               type="submit"
-              className='flex items-center justify-center gap-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 
-              px-6 py-3 text-white font-semibold shadow-md transition-all duration-300 w-full md:w-auto'
+              className='flex items-center justify-center gap-2 rounded-xl 
+                         bg-gradient-to-r from-indigo-600 to-indigo-700 
+                         hover:from-indigo-700 hover:to-indigo-800 
+                         px-6 py-3 text-white font-semibold shadow-md 
+                         transition-all duration-200 w-full h-full'
             >
               <img src={assets.searchIcon} alt="searchIcon" className='h-5' />
               <span>Find Stays</span>
