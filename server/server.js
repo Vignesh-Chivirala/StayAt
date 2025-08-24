@@ -19,7 +19,7 @@ app.use(cors());
 
 
 app.post("/api/stripe",express.raw({ type: "application/json" }),stripeWebhooks);
-
+app.post("/api/clerk", express.raw({ type: "application/json" }), clerkWebhooks);
 
 app.use(express.json());
 app.use(clerkMiddleware());
