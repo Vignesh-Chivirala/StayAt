@@ -19,7 +19,7 @@ export const AppProvider = ({ children }) => {
     const [isOwner, setIsOwner] = useState(false);
     const [showHotelReg, setShowHotelReg] = useState(false);
     const [rooms, setRooms] = useState([]);
-    const [searchedCities, setSearchedCities] = useState([]); // max 3 recent searched cities
+    const [searchedCities, setSearchedCities] = useState([]);
 
     const facilityIcons = {
         "Free WiFi": assets.freeWifiIcon,
