@@ -1,15 +1,15 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
-import connectDB from "./db/index.js";
+import connectDB from "../db/index.js";
 import { clerkMiddleware } from "@clerk/express";
-import userRouter from "./routes/userRoutes.js";
-import hotelRouter from "./routes/hotelRoutes.js";
-import roomRouter from "./routes/roomRoutes.js";
-import bookingRouter from "./routes/bookingRoutes.js";
-import clerkWebhooks from "./controllers/clerkWebhooks.js";
-import connectCloudinary from "./db/cloudinary.js";
-import { stripeWebhooks } from "./controllers/stripeWebhooks.js";
+import userRouter from "../routes/userRoutes.js";
+import hotelRouter from "../routes/hotelRoutes.js";
+import roomRouter from "../routes/roomRoutes.js";
+import bookingRouter from "../routes/bookingRoutes.js";
+import clerkWebhooks from "../controllers/clerkWebhooks.js";
+import connectCloudinary from "../db/cloudinary.js";
+import { stripeWebhooks } from "../controllers/stripeWebhooks.js";
 
 
 connectCloudinary();
@@ -38,11 +38,11 @@ connectDB()
         console.log("Error: ",error);
         throw error
     })
-    app.listen(process.env.PORT || 7000,()=>{
-        console.log(`Server is running at port : ${process.env.PORT}`);
-    })
+
 })
 .catch((err)=>{
     console.log("MongoDB connection failed: ",err)
 })
+
+export default app;
 

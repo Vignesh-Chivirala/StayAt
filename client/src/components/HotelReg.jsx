@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 import { assets, cities } from "../assets/assets";
+import { useAuth } from "@clerk/clerk-react";
 
 const HotelReg = () => {
-  const { setShowHotelReg, axios, getToken, setIsOwner } = useAppContext();
+  const { setShowHotelReg, axios, setIsOwner } = useAppContext();
+  const { getToken } = useAuth();
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -15,11 +17,15 @@ const HotelReg = () => {
     try {
       event.preventDefault();
 
-      const { data } = await axios.post(
-        `/api/hotels/`,
-        { name, contact, address, city },
-        { headers: { Authorization: `Bearer ${await getToken()}` } }
-      );
+      const { data } = axios.post(
+  'https://stay-at-backend.vercel.app/api/hotels/register',
+  { name, contact, address, city },
+  {
+    headers: {
+      Authorization: `Bearer ${await getToken()}`
+    }
+  }
+);
 
       if (data.success) {
         toast.success(data.message);
