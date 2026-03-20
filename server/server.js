@@ -1,15 +1,15 @@
 import express from "express";
 import "dotenv/config";
 import cors from "cors";
-import connectDB from "../db/db.js";
+import connectDB from "./db/db.js";
 import { clerkMiddleware } from "@clerk/express";
-import userRouter from "../routes/userRoutes.js";
-import hotelRouter from "../routes/hotelRoutes.js";
-import roomRouter from "../routes/roomRoutes.js";
-import bookingRouter from "../routes/bookingRoutes.js";
-import clerkWebhooks from "../controllers/clerkWebhooks.js";
-import connectCloudinary from "../db/cloudinary.js";
-import { stripeWebhooks } from "../controllers/stripeWebhooks.js";
+import userRouter from "./routes/userRoutes.js";
+import hotelRouter from "./routes/hotelRoutes.js";
+import roomRouter from "./routes/roomRoutes.js";
+import bookingRouter from "./routes/bookingRoutes.js";
+import clerkWebhooks from "./controllers/clerkWebhooks.js";
+import connectCloudinary from "./db/cloudinary.js";
+import { stripeWebhooks } from "./controllers/stripeWebhooks.js";
 
 
 connectCloudinary();
