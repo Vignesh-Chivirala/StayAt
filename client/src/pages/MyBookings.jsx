@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/assets'
-import { useAppContext } from '../context/AppContext'
+import { useAppContext } from '../context/appContext'
 import toast from 'react-hot-toast'
 
 const MyBookings = () => {
     const { axios, getToken, user } = useAppContext();
     const [bookings, setBookings] = useState([]);
 
-    const fetchUserBookings = async () => {
+    const fetchUserBookings = useCallback(async () => {
         try {
             const { data } = await axios.get('/api/bookings/user', {
                 headers: { Authorization: `Bearer ${await getToken()}` }
@@ -21,7 +21,7 @@ const MyBookings = () => {
         } catch (error) {
             toast.error(error.message);
         }
-    };
+    }, [axios, getToken]);
 
     const handlePayment = async (bookingId) => {
         try {
@@ -44,7 +44,7 @@ const MyBookings = () => {
         if (user) {
             fetchUserBookings();
         }
-    }, [user]);
+    }, [fetchUserBookings, user]);
 
     return (
         <div className="py-28 md:pb-35 md:pt-32 px-4 md:px-16 lg:px-24 xl:px-32 bg-gradient-to-b from-slate-50 to-slate-100 min-h-screen">

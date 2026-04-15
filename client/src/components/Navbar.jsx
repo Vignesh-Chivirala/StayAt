@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useClerk, UserButton } from "@clerk/clerk-react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../context/appContext";
 
 const BookIcon = () => (
   <svg

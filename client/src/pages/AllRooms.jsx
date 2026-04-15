@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { assets } from '../assets/assets'
-import { useAppContext } from '../context/AppContext'
+import { useAppContext } from '../context/appContext'
 import StarRating from '../components/StarRating'
 import { useSearchParams } from 'react-router-dom'
 
@@ -58,31 +58,34 @@ const AllRooms = () => {
 
   const handleSortChange = (option) => setSelectedSort(option);
 
-  const matchesRoomType = (room) =>
-    selectedFilters.roomType.length === 0 || selectedFilters.roomType.includes(room.roomType);
-
-  const matchesPriceRange = (room) =>
-    selectedFilters.priceRange.length === 0 ||
-    selectedFilters.priceRange.some((range) => {
-      const [min, max] = range.split(' to ').map(Number);
-      return room.pricePerNight >= min && room.pricePerNight <= max;
-    });
-
-  const sortRooms = (a, b) => {
-    if (selectedSort === 'Price Low to High') return a.pricePerNight - b.pricePerNight;
-    if (selectedSort === 'Price High to Low') return b.pricePerNight - a.pricePerNight;
-    if (selectedSort === 'Newest First') return new Date(b.createdAt) - new Date(a.createdAt);
-    return 0;
-  };
-
-  const filterDestination = (room) => {
-    const destination = searchParams.get('destination');
-    if (!destination) return true;
-    return room.hotel.city.toLowerCase().includes(destination.toLowerCase());
-  };
-
   const filteredRooms = useMemo(() => {
-    return rooms.filter((room) => matchesRoomType(room) && matchesPriceRange(room) && filterDestination(room)).sort(sortRooms);
+    const destination = searchParams.get('destination')?.toLowerCase();
+
+    const matchingRooms = rooms
+      .filter((room) => {
+        const matchesRoomType =
+          selectedFilters.roomType.length === 0 ||
+          selectedFilters.roomType.includes(room.roomType);
+
+        const matchesPriceRange =
+          selectedFilters.priceRange.length === 0 ||
+          selectedFilters.priceRange.some((range) => {
+            const [min, max] = range.split(' to ').map(Number);
+            return room.pricePerNight >= min && room.pricePerNight <= max;
+          });
+
+        const matchesDestination =
+          !destination || room.hotel.city.toLowerCase().includes(destination);
+
+        return matchesRoomType && matchesPriceRange && matchesDestination;
+      });
+
+    return [...matchingRooms].sort((a, b) => {
+      if (selectedSort === 'Price Low to High') return a.pricePerNight - b.pricePerNight;
+      if (selectedSort === 'Price High to Low') return b.pricePerNight - a.pricePerNight;
+      if (selectedSort === 'Newest First') return new Date(b.createdAt) - new Date(a.createdAt);
+      return 0;
+    });
   }, [rooms, selectedFilters, selectedSort, searchParams]);
 
   const clearFilters = () => {

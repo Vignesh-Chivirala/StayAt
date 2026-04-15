@@ -1,13 +1,12 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
-import { createContext, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { toast } from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets.js";
+import { AppContext } from "./appContext.js";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
-
-const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
@@ -21,15 +20,15 @@ export const AppProvider = ({ children }) => {
     const [rooms, setRooms] = useState([]);
     const [searchedCities, setSearchedCities] = useState([]);
 
-    const facilityIcons = {
+    const facilityIcons = useMemo(() => ({
         "Free WiFi": assets.freeWifiIcon,
         "Free Breakfast": assets.freeBreakfastIcon,
         "Room Service": assets.roomServiceIcon,
         "Mountain View": assets.mountainIcon,
         "Pool Access": assets.poolIcon,
-    };
+    }), []);
 
-    const fetchUser = async () => {
+    const fetchUser = useCallback(async () => {
         try {
             const { data } = await axios.get('/api/user', { headers: { Authorization: `Bearer ${await getToken()}` } })
             if (data.success) {
@@ -44,9 +43,9 @@ export const AppProvider = ({ children }) => {
         } catch (error) {
             toast.error(error.message)
         }
-    }
+    }, [getToken])
 
-    const fetchRooms = async () => {
+    const fetchRooms = useCallback(async () => {
         try {
             const { data } = await axios.get('/api/rooms')
             if (data.success) {
@@ -58,17 +57,17 @@ export const AppProvider = ({ children }) => {
         } catch (error) {
             toast.error(error.message)
         }
-    }
+    }, [])
 
     useEffect(() => {
         if (user) {
             fetchUser();
         }
-    }, [user]);
+    }, [fetchUser, user]);
 
     useEffect(() => {
         fetchRooms();
-    }, []);
+    }, [fetchRooms]);
 
     const value = {
         currency, navigate,
@@ -88,5 +87,3 @@ export const AppProvider = ({ children }) => {
     );
 
 };
-
-export const useAppContext = () => useContext(AppContext);

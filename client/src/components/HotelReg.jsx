@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../context/appContext";
 import toast from "react-hot-toast";
 import { assets, cities } from "../assets/assets";
 import { useAuth } from "@clerk/clerk-react";

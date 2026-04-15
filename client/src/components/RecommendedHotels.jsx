@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../context/appContext";
 import Title from "./Title";
 import HotelCard from "./HotelCard";
 

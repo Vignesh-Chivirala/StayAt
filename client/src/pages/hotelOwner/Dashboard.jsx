@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import Title from '../../components/Title';
-import { useAppContext } from '../../context/AppContext';
+import { useAppContext } from '../../context/appContext';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
-    const { currency, user, getToken, toast, axios } = useAppContext();
+    const { currency, user, getToken, axios } = useAppContext();
 
     const [dashboardData, setDashboardData] = useState({
         bookings: [],
@@ -12,7 +13,7 @@ const Dashboard = () => {
         totalRevenue: 0,
     });
 
-    const fetchDashboardData = async () => {
+    const fetchDashboardData = useCallback(async () => {
         try {
             const { data } = await axios.get('/api/bookings/hotel', {
                 headers: { Authorization: `Bearer ${await getToken()}` }
@@ -25,18 +26,16 @@ const Dashboard = () => {
         } catch (error) {
             toast.error(error.message);
         }
-    };
+    }, [axios, getToken]);
 
     useEffect(() => {
         if (user) fetchDashboardData();
-    }, [user]);
+    }, [fetchDashboardData, user]);
 
     const formatCurrency = (value) => {
-        return new Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: currency || "INR",
+        return `${currency}${new Intl.NumberFormat("en-IN", {
             maximumFractionDigits: 0
-        }).format(value);
+        }).format(Number(value) || 0)}`;
     };
 
     return (

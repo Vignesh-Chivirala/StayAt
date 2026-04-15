@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { assets, cities } from '../assets/assets'
-import { useAppContext } from '../context/AppContext';
+import { useAppContext } from '../context/appContext';
 
 const Hero = () => {
   const { navigate, getToken, axios, setSearchedCities } = useAppContext();
