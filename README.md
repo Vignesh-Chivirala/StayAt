@@ -1,138 +1,70 @@
 
-# StayAt – Hotel Booking Platform
+# StayAt — Hotel Booking Platform
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Tech](https://img.shields.io/badge/stack-MERN-green)
-![Status](https://img.shields.io/badge/status-Active-success)
-![Frontend](https://img.shields.io/badge/frontend-React%20%7C%20Vite-blue)
-![Backend](https://img.shields.io/badge/backend-Node.js%20%7C%20Express-lightgrey)
-![Database](https://img.shields.io/badge/database-MongoDB-green)
-![Payments](https://img.shields.io/badge/payments-Stripe-purple)
-
-
----
-
-## Live Demo
-
-- Frontend: https://your-frontend-url.vercel.app
-- Backend API: https://your-backend-url.onrender.com
-
----
+StayAt is a full-stack hotel booking application that enables users to search, check availability, and reserve rooms in real time, while providing hotel owners with tools to manage inventory and bookings efficiently.
 
 ## Overview
 
-A scalable full-stack hotel booking platform built using the MERN stack. Users can search hotels, check real-time availability, and securely book rooms. The system is designed with a modern UI and production-ready backend.
+* Built a scalable booking platform supporting multiple properties and dynamic availability
+* Designed a clean, responsive UI for seamless user experience
+* Implemented secure authentication and payment workflows
+* Structured backend with modular REST APIs
 
----
+## Key Features
 
-## Key Highlights
-
-- Developed a full-stack booking platform using MERN stack  
-- Implemented real-time availability tracking for multiple properties  
-- Integrated Clerk authentication for secure user management  
-- Built payment workflow using Stripe API  
-- Designed RESTful APIs for bookings, users, and hotels  
-- Optimized frontend using Vite and Tailwind CSS  
-- Enabled image uploads via Cloudinary  
-
----
-
-## Features
-
-- Hotel search and filtering  
-- Room availability management  
-- Booking system with date selection  
-- Authentication and authorization  
-- Secure payment integration  
-- Admin dashboard for hotel management  
-- Responsive UI  
-
----
-
-## Screenshots
-
-### Home Page
-![Home](./screenshots/home.png)
-
-### Hotel Listing
-![Hotels](./screenshots/hotels.png)
-
-### Booking Flow
-![Booking](./screenshots/booking.png)
-
-### Admin Dashboard
-![Dashboard](./screenshots/dashboard.png)
-
----
+* Real-time room availability and booking system
+* User authentication and protected routes
+* Hotel and room management dashboard
+* Image upload and media handling
+* Secure payment integration
+* Fully responsive design
 
 ## Tech Stack
 
-**Frontend**
-- React (Vite)
-- Tailwind CSS
-- React Router  
+Frontend
 
-**Backend**
-- Node.js
-- Express.js  
+* React.js
+* Vite
+* Tailwind CSS
 
-**Database**
-- MongoDB  
+Backend
 
-**Integrations**
-- Clerk Authentication  
-- Stripe Payments  
-- Cloudinary Storage  
+* Node.js
+* Express.js
 
----
+Database
 
-## Project Structure
+* MongoDB
 
+Integrations
+
+* Stripe (payments)
+* Cloudinary (image storage)
+* Clerk (authentication)
+
+## Architecture Highlights
+
+* RESTful API design with clear separation of concerns
+* Component-based frontend architecture
+* Scalable data models for bookings and inventory
+* Middleware-driven authentication and validation
+
+## Getting Started
+
+```bash
+git clone https://github.com/your-username/stayat.git
+cd stayat
 ```
 
-StayAt/
-├── client/
-├── api/
-├── server/
-└── README.md
-
-````
-
----
-
-## Installation
-
-### Clone Repository
-```bash
-git clone https://github.com/your-username/StayAt.git
-cd StayAt
-````
-
-### Backend Setup
+### Backend
 
 ```bash
-cd api
+cd server
 npm install
+npm run server
 ```
 
-Create `.env` file:
-
-```env
-MONGO_URI=
-CLERK_SECRET_KEY=
-STRIPE_SECRET_KEY=
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-```
-
-Run backend:
-
-```bash
-npm run dev
-```
-
-### Frontend Setup
+### Frontend
 
 ```bash
 cd client
@@ -140,19 +72,21 @@ npm install
 npm run dev
 ```
 
+## Impact
+
+* Simulates real-world booking workflows with end-to-end functionality
+* Demonstrates full-stack development, API design, and system thinking
+* Showcases production-level integrations (payments, auth, media storage)
+
+## Future Scope
+
+* Advanced filtering and recommendation system
+* Ratings and reviews
+* Admin analytics dashboard
+* Mobile application
+
+## Author
+
+Vignesh Chivirala
+
 ---
-
-## Future Enhancements
-
-* Reviews and ratings system
-* AI-based hotel recommendations
-* Advanced analytics dashboard
-* Multi-language support
-
----
-
-## License
-
-MIT License
-
-```
